@@ -26,16 +26,21 @@ class MyEuropeanParrot(MyParrot):
         return "Sqoork!"
 
     def speed(self) -> int:
-        return self.base_speed()
+        return self.base_speed
 
 
 class MyAfricanParrot(MyParrot):
+
+    def __init__(self, base_speed, load_factor, number_of_coconuts):
+        self.base_speed = base_speed
+        self.load_factor = load_factor
+        self.number_of_coconuts = number_of_coconuts
 
     def cry(self) -> str:
         return "Sqaark!"
 
     def speed(self) -> int:
-        return 0
+        return max(0, self.base_speed - self.load_factor * self.number_of_coconuts)
 
 
 class MyNorwegianBlueParrot(MyParrot):
@@ -57,30 +62,27 @@ class Parrot:
         self._number_of_coconuts = number_of_coconuts
         self._voltage = voltage
         self._nailed = nailed
+        self._base_speed = 12.0
+        self._load_factor = 9.0
 
     def speed(self):
         match self._type:
             case ParrotType.EUROPEAN:
                 return MyEuropeanParrot(self._base_speed).speed()
             case ParrotType.AFRICAN:
-                return max(0, self._base_speed() - self._load_factor() * self._number_of_coconuts)
+                return MyAfricanParrot(self._base_speed, self._load_factor, self._number_of_coconuts).speed()
             case ParrotType.NORWEGIAN_BLUE:
                 return 0 if self._nailed else self._compute_base_speed_for_voltage(self._voltage)
 
     def cry(self):
         match self._type:
             case ParrotType.EUROPEAN:
-                return MyEuropeanParrot(self._base_speed()).cry()
+                return MyEuropeanParrot(self._base_speed).cry()
             case ParrotType.AFRICAN:
-                return MyAfricanParrot().cry()
+                return MyAfricanParrot(self._base_speed, self._load_factor, self._number_of_coconuts).cry()
             case ParrotType.NORWEGIAN_BLUE:
                 return MyNorwegianBlueParrot(self._voltage).cry()
 
     def _compute_base_speed_for_voltage(self, voltage):
-        return min([24.0, voltage * self._base_speed()])
+        return min([24.0, voltage * self._base_speed])
 
-    def _load_factor(self):
-        return 9.0
-
-    def _base_speed(self):
-        return 12.0
