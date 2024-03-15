@@ -9,20 +9,33 @@ class ParrotType(Enum):
 
 
 class MyParrot(ABC):
+
     def cry(self) -> str:
+        pass
+
+    def speed(self) -> int:
         pass
 
 
 class MyEuropeanParrot(MyParrot):
 
+    def __init__(self, base_speed):
+        self.base_speed = base_speed
+
     def cry(self) -> str:
         return "Sqoork!"
+
+    def speed(self) -> int:
+        return self.base_speed()
 
 
 class MyAfricanParrot(MyParrot):
 
     def cry(self) -> str:
         return "Sqaark!"
+
+    def speed(self) -> int:
+        return 0
 
 
 class MyNorwegianBlueParrot(MyParrot):
@@ -32,6 +45,9 @@ class MyNorwegianBlueParrot(MyParrot):
 
     def cry(self) -> str:
         return "Bzzzzzz" if self.voltage > 0 else "..."
+
+    def speed(self) -> int:
+        return 0
 
 
 class Parrot:
@@ -45,7 +61,7 @@ class Parrot:
     def speed(self):
         match self._type:
             case ParrotType.EUROPEAN:
-                return self._base_speed()
+                return MyEuropeanParrot(self._base_speed).speed()
             case ParrotType.AFRICAN:
                 return max(0, self._base_speed() - self._load_factor() * self._number_of_coconuts)
             case ParrotType.NORWEGIAN_BLUE:
@@ -54,7 +70,7 @@ class Parrot:
     def cry(self):
         match self._type:
             case ParrotType.EUROPEAN:
-                return MyEuropeanParrot().cry()
+                return MyEuropeanParrot(self._base_speed()).cry()
             case ParrotType.AFRICAN:
                 return MyAfricanParrot().cry()
             case ParrotType.NORWEGIAN_BLUE:
