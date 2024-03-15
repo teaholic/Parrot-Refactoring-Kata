@@ -70,21 +70,18 @@ class Parrot:
         self._base_speed = 12.0
         self._load_factor = 9.0
 
-    def speed(self):
+    def factory(self) -> MyParrot:
         match self._type:
             case ParrotType.EUROPEAN:
-                return MyEuropeanParrot(self._base_speed).speed()
+                return MyEuropeanParrot(self._base_speed)
             case ParrotType.AFRICAN:
-                return MyAfricanParrot(self._base_speed, self._load_factor, self._number_of_coconuts).speed()
+                return MyAfricanParrot(self._base_speed, self._load_factor, self._number_of_coconuts)
             case ParrotType.NORWEGIAN_BLUE:
-                return MyNorwegianBlueParrot(self._voltage, self._nailed, self._base_speed).speed()
+                return MyNorwegianBlueParrot(self._voltage, self._nailed, self._base_speed)
+
+    def speed(self):
+        return self.factory().speed()
 
     def cry(self):
-        match self._type:
-            case ParrotType.EUROPEAN:
-                return MyEuropeanParrot(self._base_speed).cry()
-            case ParrotType.AFRICAN:
-                return MyAfricanParrot(self._base_speed, self._load_factor, self._number_of_coconuts).cry()
-            case ParrotType.NORWEGIAN_BLUE:
-                return MyNorwegianBlueParrot(self._voltage, self._nailed, self._base_speed).cry()
+        return self.factory().cry()
 
