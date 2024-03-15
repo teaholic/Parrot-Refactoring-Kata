@@ -1,13 +1,8 @@
 name: Check Draft
 
 on:
-  push:
-    - '!main'   # excludes main
   pull_request:
-    types:
-      - opened
-      - labeled
-      - unlabeled
+    branches: [ "main" ]
 
 jobs:
   fail-for-draft:

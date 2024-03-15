@@ -34,3 +34,11 @@ I set up the CI to automate:
 - running linting, using flake8
 - running tests, using pytest
 
+# How I refactored
+
+- Extracting MyEuropeanParrot class
+- Extracting MyAfricanParrot class
+- Extracting MyNorwegianBlueParrot class
+- Extracting speed method
+- Extracting factory method
+- Renaming parrot_factory method
