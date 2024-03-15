@@ -36,6 +36,17 @@ I set up the CI to automate:
 
 # How I refactored
 
+In this kata, I focused on refactoring method. My aim was to refactor iteratively in short steps (=commits), and having tests pass at each commit.
+
+Before each commit, I
+- added first refactoring as dead code
+- run tests (tests are expected to pass)
+- added the refactored implementation in Parrot class methods
+- run tests (tests are expected to pass)
+
+
+Here below is the list of refactoring commits:
+
 - Extracting MyEuropeanParrot class
 - Extracting MyAfricanParrot class
 - Extracting MyNorwegianBlueParrot class
