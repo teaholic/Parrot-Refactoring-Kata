@@ -12,13 +12,26 @@ class MyParrot(ABC):
     def cry(self) -> str:
         pass
 
+
 class MyEuropeanParrot(MyParrot):
+
     def cry(self) -> str:
         return "Sqoork!"
 
+
 class MyAfricanParrot(MyParrot):
+
     def cry(self) -> str:
         return "Sqaark!"
+
+
+class MyNorwegianBlueParrot(MyParrot):
+
+    def __init__(self, voltage):
+        self.voltage = voltage
+
+    def cry(self) -> str:
+        return "Bzzzzzz" if self.voltage > 0 else "..."
 
 
 class Parrot:
@@ -45,7 +58,7 @@ class Parrot:
             case ParrotType.AFRICAN:
                 return MyAfricanParrot().cry()
             case ParrotType.NORWEGIAN_BLUE:
-                return "Bzzzzzz" if self._voltage > 0 else "..."
+                return MyNorwegianBlueParrot(self._voltage).cry()
 
     def _compute_base_speed_for_voltage(self, voltage):
         return min([24.0, voltage * self._base_speed()])
