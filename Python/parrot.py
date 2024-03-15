@@ -1,3 +1,4 @@
+from abc import ABC
 from enum import Enum
 
 
@@ -5,6 +6,15 @@ class ParrotType(Enum):
     EUROPEAN = 1
     AFRICAN = 2
     NORWEGIAN_BLUE = 3
+
+
+class MyParrot(ABC):
+    def cry(self) -> str:
+        pass
+
+class MyEuropeanParrot(MyParrot):
+    def cry(self) -> str:
+        return "Sqoork!"
 
 
 class Parrot:
@@ -27,7 +37,7 @@ class Parrot:
     def cry(self):
         match self._type:
             case ParrotType.EUROPEAN:
-                return "Sqoork!"
+                return MyEuropeanParrot().cry()
             case ParrotType.AFRICAN:
                 return "Sqaark!"
             case ParrotType.NORWEGIAN_BLUE:
