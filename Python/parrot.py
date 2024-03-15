@@ -16,6 +16,10 @@ class MyEuropeanParrot(MyParrot):
     def cry(self) -> str:
         return "Sqoork!"
 
+class MyAfricanParrot(MyParrot):
+    def cry(self) -> str:
+        return "Sqaark!"
+
 
 class Parrot:
 
@@ -39,7 +43,7 @@ class Parrot:
             case ParrotType.EUROPEAN:
                 return MyEuropeanParrot().cry()
             case ParrotType.AFRICAN:
-                return "Sqaark!"
+                return MyAfricanParrot().cry()
             case ParrotType.NORWEGIAN_BLUE:
                 return "Bzzzzzz" if self._voltage > 0 else "..."
 
